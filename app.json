@@ -1,0 +1,8 @@
+{
+  "name": "Node.js Water Server",
+  "description": "Server for water",
+  "repository": "https://github.com/gtg092x/water-server",
+  "logo": "http://node-js-sample.herokuapp.com/node.svg",
+  "keywords": ["node", "express"],
+  "image": "heroku/nodejs"
+}

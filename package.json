@@ -1,0 +1,25 @@
+{
+  "name": "remoteserver",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "bookshelf": "^0.9.1",
+    "express": "^4.13.3",
+    "knex": "^0.9.0",
+    "pg": "^4.4.3",
+    "sqlite3": "^3.1.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.4.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gtg092x/water-server"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
