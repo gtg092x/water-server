@@ -1,6 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
-var outDir = 'build';
+var outDir = 'public';
 
 module.exports = {
     devtool: 'source-map',

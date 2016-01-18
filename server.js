@@ -16,19 +16,9 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true
 }));
 
-var knex = require('knex')({
-    client: 'pg',
-    connection: process.env.DATABASE_URL
-});
-
-var bookshelf = require('bookshelf')(knex);
-
-/* !!!!!!!MODELS!!!!!! */
-import models from './server/models'
-
-models(bookshelf);
-/* !!!!!!!MODELS!!!!!! */
-
+import db from './server/db'
+app.set('db', db);
+import './server/models'
 
 /* !!!!!!!ROUTES!!!!!! */
 import routes from './server/routes'
@@ -50,12 +40,12 @@ if (isDevelopment) {
         });
 }
 
-//bookshelf.DB.knex.client.getConnection().then(function (connection) {
+db.sync().then(function (connection) {
     app.listen(port, (err) => {
         if (err) { console.log(err) };
         console.log(`Listening at localhost:${port}`);
     });
-//}).catch(function (err) {
-    //console.log('Ooops, something went wrong!', err);
-//});
+}).catch(function (err) {
+    console.log('Ooops, something went wrong!', err);
+});
 

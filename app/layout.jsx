@@ -9,7 +9,9 @@ var Layout = React.createClass({
                     <title>App</title>
                 </head>
                 <body>
-                {this.props.app}
+                <div id='layout' dangerouslySetInnerHTML={{__html:this.props.app}}>
+                </div>
+                <script src='/bundle.js'></script>
                 </body>
             </html>
         );

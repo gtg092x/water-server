@@ -1,13 +1,5 @@
-class Registry{
+import Device from './device'
+import Reading from './device-reading'
 
-}
-
-export default new Registry();
-
-export default (bookshelf)=> {
-
-    var Device = bookshelf.Model.extend({
-        tableName: 'device'
-    });
-
-};
+Reading.belongsTo(Device);
+Device.hasMany(Reading);

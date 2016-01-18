@@ -16,8 +16,8 @@ let server = ((req, res) => {
             // You can also check renderProps.components or renderProps.routes for
             // your "not found" component or route respectively, and send a 404 as
             // below, if you're using a catch-all route.
-            let routerContext = <RouterContext {...renderProps} />;
-            let appMarkup = renderToString(<Layout app={routerContext} />);
+            let routerContext = renderToString(<RouterContext {...renderProps} />);
+            let appMarkup = renderToStaticMarkup(<Layout app={routerContext} />);
 
             res.status(200).send(`<!doctype>${appMarkup}`);
         } else {
