@@ -3,6 +3,10 @@ var React = require('react');
 import $ from 'jquery';
 import moment from 'moment';
 import Chart from './chart';
+
+const TEMP_BOUNDS_TOP = 400;
+const TEMP_BOUNDS_BOTTOM = -100;
+
 var Index = React.createClass({
     render: function() {
         let data = this.props.readings.map((reading)=> {
@@ -24,9 +28,14 @@ var IndexWrapped = React.createClass({
         return {readings:false};
     },
     componentDidMount(){
+
+
+
         $.get('/list-readings', (data)=>{
             this.setState({
-                readings:data.readings
+                readings:data.readings.filter((read)=>{
+                    return read.temp < TEMP_BOUNDS_TOP && read.temp > TEMP_BOUNDS_BOTTOM
+                })
             })
         });
     },
