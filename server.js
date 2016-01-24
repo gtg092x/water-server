@@ -12,13 +12,8 @@ let static_path = path.join(__dirname, 'public');
 
 const port = process.env.PORT || 8080;
 
-app.use(function(req, res, next) {
-    global.navigator = {
-        userAgent: req.headers['user-agent']
-    }
-    next();
-});
 
+app.use(express.static(static_path));
 app.use(bodyParser.json());       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true
@@ -34,7 +29,7 @@ import routes from './server/routes'
 routes(app);
 /* !!!!!!!ROUTES!!!!!! */
 
-app.use(express.static(static_path));
+
 
 if (isDevelopment) {
     var config = require('./webpack.config');
