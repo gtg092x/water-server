@@ -1,7 +1,11 @@
 var path = require('path');
 var webpack = require('webpack');
 var outDir = 'public';
-module.exports = {
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var configBase = require('./webpack.config.base');
+var _ = require('lodash');
+
+module.exports = _.defaults({
     devtool: 'eval',
 
     entry: [
@@ -10,34 +14,11 @@ module.exports = {
         './app/entry'
     ],
 
-    output: {
-        path: path.join(__dirname, outDir),
-        filename: 'bundle.js',
-        publicPath: '/'+outDir+'/'
-    },
 
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoErrorsPlugin()
-    ],
-
-    resolve: {
-        extensions: ['', '.js', '.jsx']
-    },
-
-    module: {
-        loaders: [
-            { test: /\.jsx$/,
-                loader: 'react-hot!babel',
-                include: path.join(__dirname, 'app') },
-            { test: /\.js$/,
-                loader: 'babel',
-                include: path.join(__dirname, 'app') },
-            { test: /\.scss?$/,
-                loader: 'style!css!sass',
-                include: path.join(__dirname, 'style') },
-            { test: /\.css$/,
-                loader: 'style!css' }
-        ]
-    }
-}
+        new webpack.NoErrorsPlugin(),
+        new ExtractTextPlugin('main.css',{allChunks: true})
+    ]},
+    configBase
+)

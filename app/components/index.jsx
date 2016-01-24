@@ -2,19 +2,16 @@
 var React = require('react');
 import $ from 'jquery';
 import moment from 'moment';
+import Chart from './chart';
 var Index = React.createClass({
     render: function() {
-
+        let data = this.props.readings.map((reading)=> {
+            return {y:reading.temp,x:reading.createdAt};
+        });
         return (
             <div className="index">
                 <h1>App</h1>
-                <ul>
-                    {this.props.readings.map((reading)=>{
-
-                        var date = moment(reading.createdAt).fromNow();
-                        return (<li key={reading.id}>{date}: {reading.temp} degrees</li>);
-                    })}
-                </ul>
+                <Chart data={data} />
             </div>
         );
     }

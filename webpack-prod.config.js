@@ -1,17 +1,15 @@
 var path = require('path');
 var webpack = require('webpack');
 var outDir = 'public';
+var configBase = require('./webpack.config.base');
+var _ = require('lodash');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
-module.exports = {
+module.exports = _.defaults({
     devtool: 'source-map',
     entry: [
         './app/entry'
     ],
-    output: {
-        path: path.join(__dirname, outDir),
-        filename: 'bundle.js',
-        publicPath: '/' + outDir + '/'
-    },
     plugins: [
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.UglifyJsPlugin({
@@ -19,22 +17,7 @@ module.exports = {
             compress: {
                 warnings: false
             }
-        })
-    ],
-    resolve: {
-        extensions: ['', '.js', '.jsx']
-    },
-    module: {
-        loaders: [
-            { test: /\.jsx$/,
-                loader: 'babel',
-                include: path.join(__dirname, 'app') },
-            { test: /\.js$/,
-                loader: 'babel',
-                exclude: /node_modules/ },
-            { test: /\.scss?$/,
-                loader: 'style!css!sass',
-                include: path.join(__dirname, 'style') },
-        ]
-    }
-}
+        }),
+        new ExtractTextPlugin('main.css', { allChunks: true }),
+    ]},
+    configBase)

@@ -2,6 +2,7 @@
 var React = require('react');
 import Nav from './components/nav'
 
+
 var App = React.createClass({
     render: function() {
         return (

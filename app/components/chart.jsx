@@ -9,14 +9,11 @@ var Chart = React.createClass({
     },
     componentDidMount: function() {
         var el = this.getDOMNode();
-        d3Chart.create(el, {
-            width: '100%',
-            height: '300px'
-        }, this.getChartState());
+        d3Chart.create(el, this.getChartState().data);
     },
     componentDidUpdate: function() {
         var el = this.getDOMNode();
-        d3Chart.update(el, this.getChartState());
+        //d3Chart.update(el, this.getChartState());
     },
 
     getChartState: function() {
@@ -28,7 +25,7 @@ var Chart = React.createClass({
 
     componentWillUnmount: function() {
         var el = this.getDOMNode();
-        d3Chart.destroy(el);
+        //d3Chart.destroy(el);
     },
 
     render: function() {
