@@ -34,7 +34,7 @@ var IndexWrapped = React.createClass({
         $.get('/list-readings', (data)=>{
             this.setState({
                 readings:data.readings.filter((read)=>{
-                    return read.temp < TEMP_BOUNDS_TOP && read.temp > TEMP_BOUNDS_BOTTOM
+                    return Number(read.temp) < TEMP_BOUNDS_TOP && Number(read.temp) > TEMP_BOUNDS_BOTTOM
                 })
             })
         });
