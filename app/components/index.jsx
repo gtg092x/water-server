@@ -4,6 +4,7 @@ import $ from 'jquery';
 import moment from 'moment';
 import Chart from './chart';
 
+
 const TEMP_BOUNDS_TOP = 400;
 const TEMP_BOUNDS_BOTTOM = -100;
 
@@ -27,17 +28,27 @@ var IndexWrapped = React.createClass({
     getInitialState(){
         return {readings:false};
     },
+    handleUpdate(data){
+        let readings = this.state.readings || [];
+        readings.unshift(data);
+
+        this.setState({
+            readings:readings.filter((read)=>{
+                return Number(read.temp) < TEMP_BOUNDS_TOP && Number(read.temp) > TEMP_BOUNDS_BOTTOM
+            })
+        })
+    },
     componentDidMount(){
-
-
 
         $.get('/list-readings', (data)=>{
             this.setState({
                 readings:data.readings.filter((read)=>{
                     return Number(read.temp) < TEMP_BOUNDS_TOP && Number(read.temp) > TEMP_BOUNDS_BOTTOM
                 })
-            })
+            });
         });
+
+        window.socket.on('reading', this.handleUpdate);
     },
     render(){
         if(this.state.readings) {

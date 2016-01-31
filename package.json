@@ -33,9 +33,9 @@
     "react": "^0.14.6",
     "react-dom": "^0.14.6",
     "react-router": "^2.0.0-rc5",
-
     "sass-loader": "^1.0.3",
     "sequelize": "^3.17.3",
+    "socket.io": "^1.4.5",
     "style-loader": "^0.12.3",
     "url-loader": "^0.5.6",
     "webpack": "^1.10.5"

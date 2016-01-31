@@ -7,6 +7,12 @@ import webpack from 'webpack'
 import bodyParser from 'body-parser'
 
 let app = express();
+
+let http = require('http').Server(app);
+let io = require('socket.io')(http);
+
+app.set('io',io);
+
 let isDevelopment = (process.env.NODE_ENV !== 'production');
 let static_path = path.join(__dirname, 'public');
 
@@ -21,8 +27,8 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 
 import db from './server/db'
 app.set('db', db);
-import './server/models'
-
+import models from './server/models'
+models(app)
 /* !!!!!!!ROUTES!!!!!! */
 import routes from './server/routes'
 
@@ -46,7 +52,7 @@ if (isDevelopment) {
 }
 
 db.sync().then(function (connection) {
-    app.listen(port, (err) => {
+    http.listen(port, (err) => {
         if (err) { console.log(err) };
         console.log(`Listening at localhost:${port}`);
     });

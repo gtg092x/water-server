@@ -1,6 +1,7 @@
 // main.js
 var d3Chart = require('../ext/reading-chart');
 import React from 'react';
+import $ from 'jquery';
 
 var Chart = React.createClass({
     propTypes: {
@@ -13,7 +14,10 @@ var Chart = React.createClass({
     },
     componentDidUpdate: function() {
         var el = this.getDOMNode();
-        //d3Chart.update(el, this.getChartState());
+
+        $(el).empty();
+        d3Chart.create(el, this.getChartState().data);
+
     },
 
     getChartState: function() {

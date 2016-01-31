@@ -61,6 +61,37 @@ d3Chart.create = function(el, data){
 
 };
 
+d3Chart.update = function (el, data) {
+
+    var margin = {top: 30, right: 20, bottom: 30, left: 50},
+        width = 600 - margin.left - margin.right,
+        height = 270 - margin.top - margin.bottom;
+
+
+    // Set the ranges
+    var x = d3.time.scale().range([0, width]);
+    var y = d3.scale.linear().range([height, 0]);
+
+
+    // Define the line
+    var valueline = d3.svg.line()
+        .x(function(d) { return x(new Date(d.x).getTime()); })
+        .y(function(d) { return y(d.y); });
+
+    var svg = d3.select(el).select('svg');
+    svg.data(data).enter();
+
+    // Scale the range of the data
+    x.domain(d3.extent(data, function(d) { return new Date(d.x).getTime(); }));
+    y.domain([0, d3.max(data, function(d) { return d.y; })]);
+
+    // Add the valueline path.
+    svg.select("path")
+        .attr("d", valueline(data));
+
+
+
+}
 
 
 export default d3Chart;
