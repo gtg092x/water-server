@@ -37,6 +37,7 @@
     "sequelize": "^3.17.3",
     "socket.io": "^1.4.5",
     "style-loader": "^0.12.3",
+    "twilio": "^2.9.0",
     "url-loader": "^0.5.6",
     "webpack": "^1.10.5"
   },
